@@ -121,33 +121,33 @@ const validationEmail = (regexName, valueInput, idValidation) => {
 }
 
 // Fonction pour la date de naissance
-const validationBirthdate = (regexName, valueInput, idValidation) => {
-  let value = valueInput.value;
-   if(regexName.test(value))
-  {
-    idValidation.textContent = "validé!"; 
-    idValidation.style.color = "green";
-    idValidation.style.fontSize = '16px';    
-  return true;
-  } 
-  else if (value == "")  
-  {
-    idValidation.textContent = "Ce champ est obligatoire!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
-  return false;
-  } 
-  else
-  {
-    idValidation.textContent = "Champ non valide!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
-  return false;
-  }
-}
+  /* const validationBirthdate = (regexName, valueInput, idValidation) => {
+    let value = valueInput.value;
+    if(regexName.test(value))
+    {
+      idValidation.textContent = "validé!"; 
+      idValidation.style.color = "green";
+      idValidation.style.fontSize = '16px';    
+    return true;
+    } 
+    else if (value == "")  
+    {
+      idValidation.textContent = "Ce champ est obligatoire!"; 
+      idValidation.style.color = "red";
+      idValidation.style.fontSize = '16px';
+    return false;
+    } 
+    else
+    {
+      idValidation.textContent = "Champ non valide!"; 
+      idValidation.style.color = "red";
+      idValidation.style.fontSize = '16px';
+    return false;
+    }
+  } */
 
 //Fonction pour le champ  du nombre de tourner deja fait auparavant
-const validationQuantity = () => {
+const validationQuantity = (e) => {
   let value = quantityInput.value;
   if (tournoiRegex.test(value)) 
   {
@@ -158,6 +158,7 @@ const validationQuantity = () => {
   }
   else if (typeof value == "string")  
   {
+    e.preventDefault();
     quantityError.textContent = "Veuillez saisir un nombre!"; 
     quantityError.style.color = "red";
     quantityError.style.fontSize = '16px';
@@ -165,6 +166,7 @@ const validationQuantity = () => {
   }
   else
   {
+    e.preventDefault();
     quantityError.textContent = "Champ non valide!"; 
     quantityError.style.color = "red";
     quantityError.style.fontSize = '16px';
@@ -173,21 +175,6 @@ const validationQuantity = () => {
 }
 
 // Fonction des boutons radio
-/* const valeur; */
-/* function radioBouttonValidation(e){
-  let location = document.getElementsByName('location'),
-      locationError = document.getElementById('radioBouttonError');
-  if (location[0].checked || location[1].checked || location[2].checked || location[3].checked || location[4].checked || location[5].checked){
-    locationError.textContent = "validé!"; 
-    locationError.style.color = "green";
-    locationError.style.fontSize = '16px';
-  } else {
-    e.preventDefault();
-    locationError.textContent = "Cochez une case!"; 
-    locationError.style.color = "red";
-    locationError.style.fontSize = '16px';
-  }
-} */
 const radioBouttonValidation = (e) => {
   let location = document.getElementsByName('location'),
       locationError = document.getElementById('radioBouttonError');
@@ -204,11 +191,12 @@ const radioBouttonValidation = (e) => {
     return false
   }
 }
+
 // Fonction condition d'utilisation
 const conditionValidation = (e) => {
-  let condition = document.getElementsById('checkbox1'),
+  let condition = document.getElementsByName('checkbox'),
       conditionError = document.getElementById('conditionError');
-  if (condition.checked === true){
+  if (condition[0].checked){
     conditionError.textContent = "validé!"; 
     conditionError.style.color = "green";
     conditionError.style.fontSize = '16px';
@@ -222,7 +210,7 @@ const conditionValidation = (e) => {
   }
 }
 
-
+//Validation de bouttons checkbox
 submitInput.addEventListener('click',conditionValidation);
 
 //Validation des bouttons radios
@@ -231,22 +219,27 @@ submitInput.addEventListener('click',radioBouttonValidation);
 //Validation nom 
 firstNameInput.addEventListener('blur', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
 submitInput.addEventListener('click', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
+submitInput.addEventListener('submit', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
 
 //Validation prenom
 lastNameInput.addEventListener('blur', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
 submitInput.addEventListener('click', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
+submitInput.addEventListener('submit', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
 
 //validation email
 emailInput.addEventListener('blur', function () {validationEmail(emailRegex, emailInput, emailError);}); 
 submitInput.addEventListener('click', function () {validationEmail(emailRegex, emailInput, emailError);}); 
+submitInput.addEventListener('submit', function () {validationEmail(emailRegex, emailInput, emailError);}); 
 
 //validation birthdate
 birthdateInput.addEventListener('blur', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
 submitInput.addEventListener('click', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
+submitInput.addEventListener('submit', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
 
 //validation birthdate
 quantityInput.addEventListener('blur', validationQuantity); 
 submitInput.addEventListener('click', validationQuantity); 
+submitInput.addEventListener('submit', validationQuantity); 
 
 //Fonction pour valider le formulaire
 formId.addEventListener('submit', function(e) {
@@ -255,7 +248,7 @@ formId.addEventListener('submit', function(e) {
 
 
 //Parcourir les inut du formulaire !protoype!
-const formTable = formId;
+/* const formTable = formId;
 [...formTable.elements].forEach((input) => {
   console.log(input);
-});
+}); */
