@@ -121,7 +121,7 @@ const validationEmail = (regexName, valueInput, idValidation) => {
 }
 
 // Fonction pour la date de naissance
-  /* const validationBirthdate = (regexName, valueInput, idValidation) => {
+  const validationBirthdate = (regexName, valueInput, idValidation) => {
     let value = valueInput.value;
     if(regexName.test(value))
     {
@@ -135,16 +135,16 @@ const validationEmail = (regexName, valueInput, idValidation) => {
       idValidation.textContent = "Ce champ est obligatoire!"; 
       idValidation.style.color = "red";
       idValidation.style.fontSize = '16px';
-    return false;
+    return true;
     } 
     else
     {
       idValidation.textContent = "Champ non valide!"; 
       idValidation.style.color = "red";
       idValidation.style.fontSize = '16px';
-    return false;
+    return true;
     }
-  } */
+  }
 
 //Fonction pour le champ  du nombre de tourner deja fait auparavant
 const validationQuantity = (e) => {
@@ -207,6 +207,23 @@ const conditionValidation = (e) => {
     conditionError.style.color = "red";
     conditionError.style.fontSize = '16px';
     return false
+  }
+}
+
+// Fonction validation du formlaire
+const validate = (e) => {
+let validationForm = document.getElementById("validationform");
+  if (conditionValidation && radioBouttonValidation && validationQuantity && validationName &&validationEmail ===true){
+    validationForm.textContent = "Inscritpion validé!"; 
+    validationForm.style.color = "green";
+    validationForm.style.fontSize = '16px';
+    return true
+  } else {
+    e.preventDefault();
+    validationForm.textContent = "Vous devez vérifier que vous acceptez le termes et conditions!"; 
+    validationForm.style.color = "red";
+    validationForm  .style.fontSize = '16px';
+    return false  
   }
 }
 
