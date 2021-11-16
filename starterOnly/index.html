@@ -53,6 +53,18 @@
       </div>
 
       <div class="bground">
+
+        <div class="content-validation">
+          <span class="close" id="close-modal2"></span>
+          <input
+          class="btn-submit btn-close"
+          type="button"
+          class="button"
+          value="fermez"
+          id="submitClose"
+        />
+          </div>
+
         <div class="content">
           <span class="close" id="close-modal"></span>
           <div class="modal-body">
@@ -65,20 +77,19 @@
             >
               <div
                 class="formData">
-                <label for="first">Prénom</label><span class="error" id="firstNameValidation"></span>
+                <label for="first">Prénom</label>
                 <br>
                 <input
                   class="text-control"
                   type="text"
                   id="first"
                   name="first"
-                 
-                  
                 /><br>
+                <span class="error" id="firstNameValidation"></span>
               </div>
               <div
                 class="formData">
-                <label for="last">Nom</label><span class="error" id="lastNameValidation"></span>
+                <label for="last">Nom</label>
                 <br>
                 <input
                   class="text-control"
@@ -86,12 +97,13 @@
                   id="last"
                   name="last"
                   minlength="2"
-                
+
                 /><br>
+                <span class="error" id="lastNameValidation"></span>
               </div>
               <div
                 class="formData">
-                <label for="email">E-mail</label><span class="error" id="emailValidation"></span>
+                <label for="email">E-mail</label>
                 <br>
                 <input
                   class="text-control"
@@ -99,10 +111,11 @@
                   id="email"
                   name="email"
                 /><br>
+                <span class="error" id="emailValidation"></span>
               </div>
               <div
                 class="formData">
-                <label for="birthdate">Date de naissance</label><span class="error" id="birthdateValidation"></span>
+                <label for="birthdate">Date de naissance</label>
                 <br>
                 <input
                   class="text-control"
@@ -110,11 +123,13 @@
                   id="birthdate"
                   name="birthdate"
                 /><br>
+                <span class="error" id="birthdateValidation"></span>
               </div>
               <div
                 class="formData">
-                <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><span class="error" id="quantityValidation"></span><br>
+                <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <span class="error" id="quantityValidation"></span>
               </div>
               <p class="text-label">Quelles villes ?</p>
               <div
@@ -219,11 +234,17 @@
               />
             </form>
           </div>
+          <input
+          class="btn-submit btn-close"
+          type="button"
+          class="button"
+          value="fermez"
+          id="submitClose"
+        />
         </div>
       </div>
     </main>
     <footer>
-      <span class="error" id="validationForm"></span>
       <p class="copyrights">  
         Copyright 2014 - 2020, GameOn Inc.
       </p>

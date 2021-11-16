@@ -272,7 +272,7 @@ const conditionValidation = () => {
 }
 
 // Fonction validation du formlaire
-const btn = document.getElementById("submitClose");
+const btn = document.getElementsByClassName("btn-close");
 const formulaire = document.forms["reserve"];
 /* const validationForm =  document.getElementById("validation-formulaire");*/ 
 /* const contentMessage = document.getElementsByClassName("content-validation");
@@ -284,25 +284,15 @@ if (conditionValidation && radioBouttonValidation && validationQuantity && valid
     modalBody.style.padding = "30% 15%";
     modalBody.style.fontSize = "65px";
    modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
- content.modalbg.btn.style.display = "block";
-    modalbg.formulaire.style.display = "none";
+   modalBody.btn.style.display = "block";
+    modalBody.formulaire.style.display = "none";
     return true;
   }
 }
 
-/* const validatemessage = () => {
-  modalBody.style.padding = "40% 10%";
-    modalBody.style.fontSize = "65px";
-    modalBody.innerHTML = "<p>Merci ! Votre réservation a été valider!</p>";
-    btn.style.display = "block";
-} */
-
-/* const submitId = document.getElementById("submitId");
-submitId.addEventListener("click", validatemessage); */
 
 function closeModalForm() { 
- /*  modalBody.remove("p"); */
-  btn.style.display = "none";
+  modalbg.style.display = "none";
 }
 /* closemodal.forEach(elt => elt.addEventListener("click", closeModal));
  */btn.addEventListener("click", closeModal);
