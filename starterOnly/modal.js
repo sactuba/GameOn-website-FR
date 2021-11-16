@@ -14,6 +14,9 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closemodal = document.querySelectorAll("#close-modal");
 const erreur = document.querySelectorAll(".erreur");
+const modalBody = document.querySelector(".modal-body");
+const content = document.querySelector(".content");
+
 
 //Input du formulaire
 const firstNameInput = document.getElementById("first");
@@ -26,8 +29,8 @@ const submitInput = document.getElementById("submitId");
 //Value des input
 /* const firstNameValue = firstNameInput.value;
 const lastNameValue = lastNameInput.value;
-const emailValue = emailInput.value;
-const birthdateValue = birthdateInput.value; */
+const emailValue = emailInput.value;*/
+const birthdateValue = birthdateInput.value; 
 
 //Id des span pour affiche les erruer du formulaire
 const firstNameError = document.getElementById("firstNameValidation");
@@ -36,12 +39,11 @@ const emailError = document.getElementById("emailValidation");
 const birthdateError = document.getElementById("birthdateValidation");
 const quantityError = document.getElementById("quantityValidation");
 const radioBouttonError = document.getElementById("radioBouttonError");
-
+const contentValidation = document.getElementById("validationMessage");
 //Régle regex
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const nameRegex = /^[A-Za-z_-]{2,30}$/;
-const birthdateRegex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-const tournoiRegex = /([1-9]?[0-9])|100/;
+const tournoiRegex = /^[+]?\d+([.]\d+)?$/;
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -49,6 +51,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+
 }
 
 //close modal event 
@@ -61,211 +64,275 @@ function closeModal() {
 
 // fonction de validation
 //fonction pour le nom, prenom
-const validationName = (regexName, valueInput, idValidation) => {
-  let value = valueInput.value;
+const validationName1 = (regexName, valueInput, idValidation) => {
+  let value = valueInput.value.trim();
   let valueLength = value.length;
    if(regexName.test(value))
   {
-    idValidation.textContent = "validé!"; 
-    idValidation.style.color = "green";
-    idValidation.style.fontSize = '16px';    
+    idValidation.textContent = ""; 
+    valueInput.style.borderColor = "green";
+    valueInput.style.borderWidth = "2px";
   return true;
   } 
   else if (value == "")  
   {
     idValidation.textContent = "Ce champ est obligatoire!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
   return false;
   } 
   else if (valueLength <= 2)  
   {
     idValidation.textContent = "Veuillez entrer 2 caractères ou plus!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
   return false;
   } 
   else
   {
     idValidation.textContent = "Champ non valide!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
   return false;
   }
 }
 
-// Fonction pour l'adresse email
-const validationEmail = (regexName, valueInput, idValidation) => {
-  let value = valueInput.value;
+const validationName2 = (regexName, valueInput, idValidation) => {
+  let value = valueInput.value.trim();
+  let valueLength = value.length;
    if(regexName.test(value))
   {
-    idValidation.textContent = "validé!"; 
-    idValidation.style.color = "green";
-    idValidation.style.fontSize = '16px';    
+    idValidation.textContent = ""; 
+    valueInput.style.borderColor = "green";
+    valueInput.style.borderWidth = "2px";
   return true;
   } 
   else if (value == "")  
   {
     idValidation.textContent = "Ce champ est obligatoire!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
+  return false;
+  } 
+  else if (valueLength <= 2)  
+  {
+    idValidation.textContent = "Veuillez entrer 2 caractères ou plus!"; 
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
   return false;
   } 
   else
   {
     idValidation.textContent = "Champ non valide!"; 
-    idValidation.style.color = "red";
-    idValidation.style.fontSize = '16px';
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
+  return false;
+  }
+}
+// Fonction pour l'adresse email
+const validationEmail = (regexName, valueInput, idValidation) => {
+  let value = valueInput.value.trim();
+   if(regexName.test(value))
+  {
+    idValidation.textContent = ""; 
+    valueInput.style.borderColor = "green";
+    valueInput.style.borderWidth = "2px";
+  return true;
+  } 
+  else if (value == "")  
+  {
+    idValidation.textContent = "Ce champ est obligatoire!"; 
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
+  return false;
+  } 
+  else
+  {
+    idValidation.textContent = "Champ non valide!"; 
+    valueInput.style.borderColor = "#FF4E60";
+    valueInput.style.borderWidth = "2px";
+    idValidation.style.color = "#FF4E60";
+    idValidation.style.fontSize = '12px';
   return false;
   }
 }
 
 // Fonction pour la date de naissance
-  const validationBirthdate = (regexName, valueInput, idValidation) => {
+  const validationBirthdate = (valueInput, idValidation) => {
     let value = valueInput.value;
-    if(regexName.test(value))
+    if(value != "")
     {
-      idValidation.textContent = "validé!"; 
-      idValidation.style.color = "green";
-      idValidation.style.fontSize = '16px';    
+      idValidation.textContent = ""; 
+      valueInput.style.borderColor = "green";
+      valueInput.style.borderWidth = "2px";
     return true;
     } 
     else if (value == "")  
     {
       idValidation.textContent = "Ce champ est obligatoire!"; 
-      idValidation.style.color = "red";
-      idValidation.style.fontSize = '16px';
-    return true;
+      valueInput.style.borderColor = "#FF4E60";
+      valueInput.style.borderWidth = "2px";
+      idValidation.style.color = "#FF4E60";
+      idValidation.style.fontSize = '12px';
+    return false;
     } 
     else
     {
       idValidation.textContent = "Champ non valide!"; 
-      idValidation.style.color = "red";
-      idValidation.style.fontSize = '16px';
-    return true;
+      valueInput.style.borderColor = "#FF4E60";
+      valueInput.style.borderWidth = "2px";
+      idValidation.style.color = "#FF4E60";
+      idValidation.style.fontSize = '12px';
+    return false;
     }
   }
 
+/*   function getAge() { 
+    let dateControl = document.querySelector('input[type="date"]'),
+        diff = Date.now() - dateControl.getTime(),
+        age = new Date(diff); 
+    return Math.abs(age.getUTCFullYear());
+} */
 //Fonction pour le champ  du nombre de tourner deja fait auparavant
-const validationQuantity = (e) => {
-  let value = quantityInput.value;
+const validationQuantity = () => {
+  let value = quantityInput.value.trim();
   if (tournoiRegex.test(value)) 
   {
-    quantityError.textContent = "validé!"; 
-    quantityError.style.color = "green";
-    quantityError.style.fontSize = '16px';
+    quantityError.textContent = ""; 
+    quantityInput.style.borderColor = "green";
+    quantityInput.style.borderWidth = "2px";
     return true;
   }
   else if (typeof value == "string")  
   {
-    e.preventDefault();
     quantityError.textContent = "Veuillez saisir un nombre!"; 
-    quantityError.style.color = "red";
-    quantityError.style.fontSize = '16px';
+    quantityInput.style.borderColor = "#FF4E60";
+    quantityInput.style.borderWidth = "2px";
+    quantityError.style.color = "#FF4E60";
+    quantityError.style.fontSize = '12px';
   return false;
-  }
+  } 
   else
   {
-    e.preventDefault();
     quantityError.textContent = "Champ non valide!"; 
-    quantityError.style.color = "red";
-    quantityError.style.fontSize = '16px';
-    return false;
+    quantityInput.style.borderColor = "#FF4E60";
+    quantityInput.style.borderWidth = "2px";
+    quantityError.style.color = "#FF4E60";
+    quantityError.style.fontSize = '12px';
+  return false;
 } 
 }
 
 // Fonction des boutons radio
-const radioBouttonValidation = (e) => {
+const radioBouttonValidation = () => {
   let location = document.getElementsByName('location'),
       locationError = document.getElementById('radioBouttonError');
   if (location[0].checked || location[1].checked || location[2].checked || location[3].checked || location[4].checked || location[5].checked){
     locationError.textContent = "validé!"; 
     locationError.style.color = "green";
-    locationError.style.fontSize = '16px';
+    locationError.style.fontSize = '12px'; 
     return true
   } else {
-    e.preventDefault();
-    locationError.textContent = "Cochez une case!"; 
+      locationError.textContent = "Cochez une case!"; 
     locationError.style.color = "red";
-    locationError.style.fontSize = '16px';
+    locationError.style.fontSize = '12px';
     return false
   }
 }
 
 // Fonction condition d'utilisation
-const conditionValidation = (e) => {
+const conditionValidation = () => {
   let condition = document.getElementsByName('checkbox'),
       conditionError = document.getElementById('conditionError');
-  if (condition[0].checked){
+  if (condition[1].checked){
     conditionError.textContent = "validé!"; 
     conditionError.style.color = "green";
-    conditionError.style.fontSize = '16px';
+    conditionError.style.fontSize = '12px';
     return true
   } else {
-    e.preventDefault();
     conditionError.textContent = "Vous devez vérifier que vous acceptez le termes et conditions!"; 
     conditionError.style.color = "red";
-    conditionError.style.fontSize = '16px';
+    conditionError.style.fontSize = '12px';
     return false
   }
 }
 
 // Fonction validation du formlaire
-const validate = (e) => {
-let validationForm = document.getElementById("validationform");
-  if (conditionValidation && radioBouttonValidation && validationQuantity && validationName &&validationEmail ===true){
-    validationForm.textContent = "Inscritpion validé!"; 
-    validationForm.style.color = "green";
-    validationForm.style.fontSize = '16px';
-    return true
-  } else {
-    e.preventDefault();
-    validationForm.textContent = "Vous devez vérifier que vous acceptez le termes et conditions!"; 
-    validationForm.style.color = "red";
-    validationForm  .style.fontSize = '16px';
-    return false  
+const btn = document.getElementById("submitClose");
+const formulaire = document.forms["reserve"];
+/* const validationForm =  document.getElementById("validation-formulaire");*/ 
+/* const contentMessage = document.getElementsByClassName("content-validation");
+ */function validate() {
+if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate && validationName1 && validationName2 && validationEmail === false){
+    return false; 
+  } else { 
+    /* content.style.display ="none"; */
+    modalBody.style.padding = "30% 15%";
+    modalBody.style.fontSize = "65px";
+   modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
+ content.modalbg.btn.style.display = "block";
+    modalbg.formulaire.style.display = "none";
+    return true;
   }
 }
 
+/* const validatemessage = () => {
+  modalBody.style.padding = "40% 10%";
+    modalBody.style.fontSize = "65px";
+    modalBody.innerHTML = "<p>Merci ! Votre réservation a été valider!</p>";
+    btn.style.display = "block";
+} */
+
+/* const submitId = document.getElementById("submitId");
+submitId.addEventListener("click", validatemessage); */
+
+function closeModalForm() { 
+ /*  modalBody.remove("p"); */
+  btn.style.display = "none";
+}
+/* closemodal.forEach(elt => elt.addEventListener("click", closeModal));
+ */btn.addEventListener("click", closeModal);
+
+
 //Validation de bouttons checkbox
-submitInput.addEventListener('click',conditionValidation);
+submitInput.addEventListener('click', function(e) { if (conditionValidation == false){ e.preventDefault();}else {return true}});
 
 //Validation des bouttons radios
-submitInput.addEventListener('click',radioBouttonValidation);
+submitInput.addEventListener('click',function(e) { if (radioBouttonValidation == false){ e.preventDefault();}else {return true}});
 
 //Validation nom 
-firstNameInput.addEventListener('blur', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
-submitInput.addEventListener('click', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
-submitInput.addEventListener('submit', function() {validationName(nameRegex, firstNameInput, firstNameError);});  
-
+firstNameInput.addEventListener('blur', function() {validationName1(nameRegex, firstNameInput, firstNameError);});  
+submitInput.addEventListener('click', function(e) { if (validationName1(nameRegex, firstNameInput, firstNameError) == false){ e.preventDefault();}else {return true}});  
+ 
 //Validation prenom
-lastNameInput.addEventListener('blur', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
-submitInput.addEventListener('click', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
-submitInput.addEventListener('submit', function() {validationName(nameRegex, lastNameInput, lastNameError);});  
+lastNameInput.addEventListener('blur', function() {validationName2(nameRegex, lastNameInput, lastNameError);});  
+submitInput.addEventListener('click', function(e) { if (validationName2(nameRegex, lastNameInput, lastNameError) == false){e.preventDefault();}else {return true}});  
 
 //validation email
 emailInput.addEventListener('blur', function () {validationEmail(emailRegex, emailInput, emailError);}); 
-submitInput.addEventListener('click', function () {validationEmail(emailRegex, emailInput, emailError);}); 
-submitInput.addEventListener('submit', function () {validationEmail(emailRegex, emailInput, emailError);}); 
+submitInput.addEventListener('click', function (e) { if (validationEmail(emailRegex, emailInput, emailError) == false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
-birthdateInput.addEventListener('blur', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
-submitInput.addEventListener('click', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
-submitInput.addEventListener('submit', function () {validationBirthdate(birthdateRegex, birthdateInput, birthdateError);}); 
+birthdateInput.addEventListener('blur', function () {validationBirthdate(birthdateInput, birthdateError);}); 
+submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) == false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
 quantityInput.addEventListener('blur', validationQuantity); 
-submitInput.addEventListener('click', validationQuantity); 
-submitInput.addEventListener('submit', validationQuantity); 
+submitInput.addEventListener('click', function (e) {if (validationQuantity() == false){e.preventDefault();}else{return true}}); 
 
 //Fonction pour valider le formulaire
-formId.addEventListener('submit', function(e) {
-  e.preventDefault();
-}) ;
 
-
-//Parcourir les inut du formulaire !protoype!
-/* const formTable = formId;
-[...formTable.elements].forEach((input) => {
-  console.log(input);
-}); */
