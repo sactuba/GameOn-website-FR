@@ -64,6 +64,8 @@ function closeModal() {
 
 // fonction de validation
 //fonction pour le nom, prenom
+
+   
 const validationName1 = (regexName, valueInput, idValidation) => {
   let value = valueInput.value.trim();
   let valueLength = value.length;
@@ -271,31 +273,29 @@ const conditionValidation = () => {
   }
 }
 
+
 // Fonction validation du formlaire
-const btn = document.getElementsByClassName("btn-close");
+const btn = document.getElementById("submitClose");
 const formulaire = document.forms["reserve"];
-/* const validationForm =  document.getElementById("validation-formulaire");*/ 
-/* const contentMessage = document.getElementsByClassName("content-validation");
- */function validate() {
-if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate && validationName1 && validationName2 && validationEmail === false){
+
+function validate() {
+if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate && validationName1 && validationName2 && validationEmail == false){
     return false; 
   } else { 
-    /* content.style.display ="none"; */
-    modalBody.style.padding = "30% 15%";
-    modalBody.style.fontSize = "65px";
-   modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
-   modalBody.btn.style.display = "block";
-    modalBody.formulaire.style.display = "none";
+    modalBody.style.padding = "50% 15%";
+    modalBody.style.fontSize = "54px";
+    modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
+    btn.style.display = "block";
     return true;
   }
 }
 
 
+
 function closeModalForm() { 
   modalbg.style.display = "none";
 }
-/* closemodal.forEach(elt => elt.addEventListener("click", closeModal));
- */btn.addEventListener("click", closeModal);
+btn.addEventListener("click", closeModalForm);
 
 
 //Validation de bouttons checkbox
@@ -321,7 +321,7 @@ birthdateInput.addEventListener('blur', function () {validationBirthdate(birthda
 submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) == false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
-quantityInput.addEventListener('blur', validationQuantity); 
+quantityInput.addEventListener('blur', function () {validationQuantity();}); 
 submitInput.addEventListener('click', function (e) {if (validationQuantity() == false){e.preventDefault();}else{return true}}); 
 
 //Fonction pour valider le formulaire
