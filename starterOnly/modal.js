@@ -260,7 +260,7 @@ const radioBouttonValidation = () => {
 const conditionValidation = () => {
   let condition = document.getElementsByName('checkbox'),
       conditionError = document.getElementById('conditionError');
-  if (condition[1].checked){
+  if (condition[0].checked){
     conditionError.textContent = "validé!"; 
     conditionError.style.color = "green";
     conditionError.style.fontSize = '12px';
@@ -279,14 +279,14 @@ const btn = document.getElementById("submitClose");
 const formulaire = document.forms["reserve"];
 
 function validate() {
-if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate && validationName1 && validationName2 && validationEmail == false){
-    return false; 
-  } else { 
+  if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate(birthdateInput, birthdateError) && validationName2(nameRegex, firstNameInput, firstNameError) && validationName1(nameRegex, firstNameInput, firstNameError) && validationEmail(emailRegex, emailInput, emailError) === true){
+    btn.style.display = "block";
     modalBody.style.padding = "50% 15%";
     modalBody.style.fontSize = "54px";
     modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
-    btn.style.display = "block";
     return true;
+  } else { 
+    return false; 
   }
 }
 
@@ -295,34 +295,38 @@ if (conditionValidation && radioBouttonValidation && validationQuantity && valid
 function closeModalForm() { 
   modalbg.style.display = "none";
 }
+
 btn.addEventListener("click", closeModalForm);
 
 
-//Validation de bouttons checkbox
-submitInput.addEventListener('click', function(e) { if (conditionValidation == false){ e.preventDefault();}else {return true}});
 
-//Validation des bouttons radios
-submitInput.addEventListener('click',function(e) { if (radioBouttonValidation == false){ e.preventDefault();}else {return true}});
 
 //Validation nom 
 firstNameInput.addEventListener('blur', function() {validationName1(nameRegex, firstNameInput, firstNameError);});  
-submitInput.addEventListener('click', function(e) { if (validationName1(nameRegex, firstNameInput, firstNameError) == false){ e.preventDefault();}else {return true}});  
+submitInput.addEventListener('click', function(e) { if (validationName1(nameRegex, firstNameInput, firstNameError) === false){ e.preventDefault();}/* else {return true} */});  
  
 //Validation prenom
 lastNameInput.addEventListener('blur', function() {validationName2(nameRegex, lastNameInput, lastNameError);});  
-submitInput.addEventListener('click', function(e) { if (validationName2(nameRegex, lastNameInput, lastNameError) == false){e.preventDefault();}else {return true}});  
+submitInput.addEventListener('click', function(e) { if (validationName2(nameRegex, lastNameInput, lastNameError) === false){e.preventDefault();}else {return true}});  
 
 //validation email
 emailInput.addEventListener('blur', function () {validationEmail(emailRegex, emailInput, emailError);}); 
-submitInput.addEventListener('click', function (e) { if (validationEmail(emailRegex, emailInput, emailError) == false){e.preventDefault();}else {return true}}); 
+submitInput.addEventListener('click', function (e) { if (validationEmail(emailRegex, emailInput, emailError) === false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
 birthdateInput.addEventListener('blur', function () {validationBirthdate(birthdateInput, birthdateError);}); 
-submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) == false){e.preventDefault();}else {return true}}); 
+submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) === false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
-quantityInput.addEventListener('blur', function () {validationQuantity();}); 
-submitInput.addEventListener('click', function (e) {if (validationQuantity() == false){e.preventDefault();}else{return true}}); 
+quantityInput.addEventListener('blur', function () {validationQuantity}); 
+submitInput.addEventListener('click', function (e) {if (validationQuantity() === false){e.preventDefault();}else{return true}}); 
+
+//Validation de bouttons checkbox
+submitInput.addEventListener('click', conditionValidation);
+
+//Validation des bouttons radios
+submitInput.addEventListener('click', radioBouttonValidation);
+
 
 //Fonction pour valider le formulaire
 
