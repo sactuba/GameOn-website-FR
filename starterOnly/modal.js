@@ -258,7 +258,7 @@ const radioBouttonValidation = () => {
 
 // Fonction condition d'utilisation
 const conditionValidation = () => {
-  let condition = document.getElementsByName('checkbox'),
+  let condition  = document.getElementsByName('checkbox'),
       conditionError = document.getElementById('conditionError');
   if (condition[0].checked){
     conditionError.textContent = "validé!"; 
@@ -277,33 +277,25 @@ const conditionValidation = () => {
 // Fonction validation du formlaire
 const btn = document.getElementById("submitClose");
 const formulaire = document.forms["reserve"];
-
 function validate() {
-  if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate(birthdateInput, birthdateError) && validationName2(nameRegex, firstNameInput, firstNameError) && validationName1(nameRegex, firstNameInput, firstNameError) && validationEmail(emailRegex, emailInput, emailError) === true){
-    btn.style.display = "block";
-    modalBody.style.padding = "50% 15%";
+  if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate(birthdateInput, birthdateError) && validationName2(nameRegex, firstNameInput, firstNameError) && validationName1(nameRegex, firstNameInput, firstNameError) && validationEmail(emailRegex, emailInput, emailError) === false){
+    alert("bipbip");
+    return false;
+  } else {     
+    modalBody.style.padding = "20% 15%";
     modalBody.style.fontSize = "54px";
-    modalBody.innerHTML = "<p>Merci! Votre réservation a été valider!</p>";
+    modalBody.innerHTML = '<p>Merci! Votre réservation a été reçue!</p><br><a class="btn-close"  id="close-modal">Fermez</a>';
     return true;
-  } else { 
-    return false; 
   }
 }
 
 
-
-function closeModalForm() { 
-  modalbg.style.display = "none";
-}
-
-btn.addEventListener("click", closeModalForm);
-
-
-
+//Fonction pour fermer la page de validation du formulaire
+document.addEventListener("click", function(e){ if(e.target.id === 'close-modal') {closeModal();}});
 
 //Validation nom 
 firstNameInput.addEventListener('blur', function() {validationName1(nameRegex, firstNameInput, firstNameError);});  
-submitInput.addEventListener('click', function(e) { if (validationName1(nameRegex, firstNameInput, firstNameError) === false){ e.preventDefault();}/* else {return true} */});  
+submitInput.addEventListener('click', function(e) { if (validationName1(nameRegex, firstNameInput, firstNameError) === false){ e.preventDefault();}else {return true}});  
  
 //Validation prenom
 lastNameInput.addEventListener('blur', function() {validationName2(nameRegex, lastNameInput, lastNameError);});  
@@ -318,14 +310,14 @@ birthdateInput.addEventListener('blur', function () {validationBirthdate(birthda
 submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) === false){e.preventDefault();}else {return true}}); 
 
 //validation birthdate
-quantityInput.addEventListener('blur', function () {validationQuantity}); 
-submitInput.addEventListener('click', function (e) {if (validationQuantity() === false){e.preventDefault();}else{return true}}); 
+quantityInput.addEventListener('blur', function () {validationQuantity;}); 
+submitInput.addEventListener('click', function (e) {if (validationQuantity() === false){e.preventDefault();}else {return true;}}); 
 
 //Validation de bouttons checkbox
-submitInput.addEventListener('click', conditionValidation);
+submitInput.addEventListener('click', function (e) {if (conditionValidation() === false){e.preventDefault();}else{return true;}});
 
 //Validation des bouttons radios
-submitInput.addEventListener('click', radioBouttonValidation);
+submitInput.addEventListener('click', function (e) {if (radioBouttonValidation() === false){e.preventDefault();}else{return true;}});
 
 
 //Fonction pour valider le formulaire

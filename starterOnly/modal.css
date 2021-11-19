@@ -353,9 +353,9 @@ input[data-error]::after {
 }
 
 .btn-close {
-  display: none;
+  display: block;
+  text-align: center;
   background: #fe142f;
-  margin: 0 auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
