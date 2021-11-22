@@ -185,7 +185,7 @@ const validationEmail = (regexName, valueInput, idValidation) => {
     } 
     else if (value == "")  
     {
-      idValidation.textContent = "Ce champ est obligatoire!"; 
+      idValidation.textContent = "Vous devez entrez votre date de naissance!"; 
       valueInput.style.borderColor = "#FF4E60";
       valueInput.style.borderWidth = "2px";
       idValidation.style.color = "#FF4E60";
@@ -249,7 +249,7 @@ const radioBouttonValidation = () => {
     locationError.style.fontSize = '12px'; 
     return true
   } else {
-      locationError.textContent = "Cochez une case!"; 
+      locationError.textContent = "Vous devez choisir une option!"; 
     locationError.style.color = "red";
     locationError.style.fontSize = '12px';
     return false
@@ -261,7 +261,7 @@ const conditionValidation = () => {
   let condition  = document.getElementsByName('checkbox'),
       conditionError = document.getElementById('conditionError');
   if (condition[0].checked){
-    conditionError.textContent = "validé!"; 
+    conditionError.textContent = ""; 
     conditionError.style.color = "green";
     conditionError.style.fontSize = '12px';
     return true
@@ -275,16 +275,11 @@ const conditionValidation = () => {
 
 
 // Fonction validation du formlaire
-const btn = document.getElementById("submitClose");
-const formulaire = document.forms["reserve"];
 function validate() {
-  if (conditionValidation && radioBouttonValidation && validationQuantity && validationBirthdate(birthdateInput, birthdateError) && validationName2(nameRegex, firstNameInput, firstNameError) && validationName1(nameRegex, firstNameInput, firstNameError) && validationEmail(emailRegex, emailInput, emailError) === false){
-    alert("bipbip");
+  if (conditionValidation() && radioBouttonValidation() && validationQuantity() && validationBirthdate(birthdateInput, birthdateError) && validationName2(nameRegex, firstNameInput, firstNameError) && validationName1(nameRegex, firstNameInput, firstNameError) && validationEmail(emailRegex, emailInput, emailError) === false){
     return false;
   } else {     
-    modalBody.style.padding = "20% 15%";
-    modalBody.style.fontSize = "54px";
-    modalBody.innerHTML = '<p>Merci! Votre réservation a été reçue!</p><br><a class="btn-close"  id="close-modal">Fermez</a>';
+    modalBody.innerHTML = '<p class="modal-body-validate">Merci! Votre réservation a été reçue!</p><br><a class="btn-close"  id="close-modal">Fermez</a>';
     return true;
   }
 }
@@ -309,8 +304,8 @@ submitInput.addEventListener('click', function (e) { if (validationEmail(emailRe
 birthdateInput.addEventListener('blur', function () {validationBirthdate(birthdateInput, birthdateError);}); 
 submitInput.addEventListener('click', function (e) { if (validationBirthdate(birthdateInput, birthdateError) === false){e.preventDefault();}else {return true}}); 
 
-//validation birthdate
-quantityInput.addEventListener('blur', function () {validationQuantity;}); 
+//validation quantity
+quantityInput.addEventListener('blur', function () {validationQuantity();}); 
 submitInput.addEventListener('click', function (e) {if (validationQuantity() === false){e.preventDefault();}else {return true;}}); 
 
 //Validation de bouttons checkbox

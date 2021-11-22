@@ -103,6 +103,9 @@ img {
     display: block;
     margin-top: -15px;
   }
+  .content {
+    margin: 20% auto;
+  }
 }
 
 main {
@@ -205,6 +208,13 @@ main {
   margin: 15px auto;
 }
 
+.modal-body-validate {
+  text-align: center;
+  padding: 40% 8%;
+  margin: 15px auto;
+  font-size: 50px;
+}
+
 label {
   font-family: var(--font-default);
   font-size: 17px;
@@ -243,12 +253,7 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -353,9 +358,10 @@ input[data-error]::after {
 }
 
 .btn-close {
-  display: block;
   text-align: center;
   background: #fe142f;
+  display: table;
+  margin: 0 auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
